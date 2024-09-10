@@ -1,0 +1,11 @@
+/* Navbar CSS */
+.navbar-sizing {
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: var(--secondary-color) !important;
+    color: var(--primary-color) !important; /* Use the same font color as the body */
+}
+
+a {
+    color: var(--primary-color) !important;
+}

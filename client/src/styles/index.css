@@ -1,0 +1,34 @@
+:root {
+    /* Base font size */
+    font-size: 16px;
+  
+    /* Font family */
+    --font-family: 'Georama', sans-serif; /* Updated to Georama */
+  
+    /* Colors */
+    --primary-color: #ECEFF1;
+    --secondary-color: #455A64;
+    --accent-color: #B2DFDB;
+    --background-color: #E3F2FD;
+  
+  
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+  
+    /* Border radius */
+    --border-radius: 4px;
+}
+  
+/* Body CSS */
+body {
+    font-family: var(--font-family) !important;
+    background-color: var(--background-color) !important;
+    color: var(--primary-color) !important; /* Apply the font color globally */
+    margin: 0;
+    padding: 0;
+}
+
