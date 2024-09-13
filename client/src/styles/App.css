@@ -1,11 +1,36 @@
 /* Navbar CSS */
-.navbar-sizing {
-    max-width: 1100px;
+.content-sizing {
+    max-width: 1150px;
     margin: 0 auto;
-    background-color: var(--secondary-color) !important;
-    color: var(--primary-color) !important; /* Use the same font color as the body */
+    background-color: var(--background--color);
+    color: var(--text-color) !important; /* Use the same font color as the body */
 }
 
 a {
     color: var(--primary-color) !important;
 }
+
+.nav-section-container{
+    border-bottom: solid 2px rgba(255, 255, 255, 0.7); 
+   
+}
+
+/* qrstories */
+
+.app-title-heading{
+    background-color: var(--secondary--text--color);
+}
+
+.create-file-section{
+    background-color:var(--secondary-background-color) !important;
+    opacity: 0.7;
+}
+
+
+/* css for the images in the carousel */
+/* Add this CSS */
+.content-sizing img {
+    max-height: 400px; /* Set the desired maximum height */
+    object-fit: contain; /* This ensures the image covers the entire area without distortion */
+    opacity: 0.4;
+  }

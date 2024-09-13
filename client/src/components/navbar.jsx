@@ -1,18 +1,19 @@
 import React from 'react';
 import '../styles/App.css'
 import '../styles/index.css'
-import qrCode from '../assets/qr_code.png';
+import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 
 const Navbar = () => {
   return (
    <>
-   <nav className='navbar-sizing mb-4'>
-    <div className='container navbar-custom'>
-      <div className='py-4 px-3 d-flex flex-direction-column justify-content-between '>
-        <div>
-          <img src={qrCode} alt="qr-logo" style={{height: 44} } />
+   <nav className='content-sizing nav-section-container mb-5'>
+    <div className='container navbar-custom '>
+      <div className='p-4 d-flex flex-direction-column justify-content-between '>
+        <div className='d-flex align-items-center '>
+          <QrCodeScannerIcon className='me-4' style={{fontSize: 44}} />
+          <a className='text-decoration-none fw-bold fs-2 ' href=""> QR'iifyy </a>
         </div>
-        <a className='text-decoration-none  fs-2 ' href=""> QR'iifyy </a>
+       
       </div>
     </div>
    </nav>

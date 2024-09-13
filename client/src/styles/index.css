@@ -3,14 +3,13 @@
     font-size: 16px;
   
     /* Font family */
-    --font-family: 'Georama', sans-serif; /* Updated to Georama */
+    --font-family: 'Tinos', serif !important; /* Example font */
   
     /* Colors */
-    --primary-color: #ECEFF1;
-    --secondary-color: #455A64;
-    --accent-color: #B2DFDB;
-    --background-color: #E3F2FD;
-  
+    --background-color: rgb(74, 87, 105) !important; /* Light gray background */
+    --text-color: rgba(255, 255, 255, 0.7); /* Dark gray for text */
+    --secondary-text-color: rgb(216, 208, 208);
+    --secondary-background-color: rgb(134, 150, 170);
   
     /* Spacing */
     --spacing-xs: 4px;
@@ -22,13 +21,12 @@
     /* Border radius */
     --border-radius: 4px;
 }
-  
+
 /* Body CSS */
 body {
     font-family: var(--font-family) !important;
     background-color: var(--background-color) !important;
-    color: var(--primary-color) !important; /* Apply the font color globally */
+    color: var(--text-color) !important; /* Default font color */
     margin: 0;
     padding: 0;
 }
-
