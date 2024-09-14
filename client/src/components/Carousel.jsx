@@ -3,14 +3,14 @@ import CarouselData from './carousedata';
 
 function CarouselSection() {
   return (
-    <div className="container content-sizing mb-4 opacity-3">
+    <div className="container carousel-container content-sizing  mb-4">
         <div className="row justify-content-center">
             <div className="col-8">
-            <Carousel className='opacity-3'>
+            <Carousel>
                 {CarouselData.map((slide, index)=> (
-                     <Carousel.Item interval={3000}>
+                     <Carousel.Item key={index} interval={2500}>
                      <img
-                     className="d-block w-100"
+                     className="w-100 carousel-img"
                      src={slide.image}  // Use the first image from the assets folder
                      alt={slide.alt}
                      />

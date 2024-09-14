@@ -9,7 +9,8 @@
     --background-color: rgb(74, 87, 105) !important; /* Light gray background */
     --text-color: rgba(255, 255, 255, 0.7); /* Dark gray for text */
     --secondary-text-color: rgb(216, 208, 208);
-    --secondary-background-color: rgb(134, 150, 170);
+    /* --secondary-background-color: rgb(134, 150, 170); */
+    --secondary-background-color: #ffffff;
   
     /* Spacing */
     --spacing-xs: 4px;
@@ -29,4 +30,16 @@ body {
     color: var(--text-color) !important; /* Default font color */
     margin: 0;
     padding: 0;
+}
+
+
+
+@media (max-width: 768px) {
+    :root {
+        font-size: 13px; 
+    }
+
+    body {
+        line-height: 1.5; 
+    }
 }

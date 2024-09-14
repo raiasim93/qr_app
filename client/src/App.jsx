@@ -2,8 +2,9 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import QRstories from './components/CreateFile';
+import CreateFile from './components/CreateFile';
 import CarouselSection from './components/Carousel';
+import Title from './components/Title';
 
 
 const App = () => {
@@ -18,8 +19,12 @@ const App = () => {
          <CarouselSection />
         </div>
         <div className="col-12">
-         <QRstories/>
+          <Title />
         </div>
+        <div className="col-12">
+         <CreateFile/>
+        </div>
+      
       </div>
     </div>
   );
