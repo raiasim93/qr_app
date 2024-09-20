@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import '../styles/App.css';
 import '../styles/index.css';
-import qrHero from '../assets/qr-hero.png'
 import ImageIcon from '@mui/icons-material/Image';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import WifiIcon from '@mui/icons-material/Wifi';  // Wi-Fi icon
 import QRCode from 'react-qr-code';
 
 const CreateFile = () => {
   const [selectedFileType, setSelectedFileType] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [socialLink, setSocialLink] = useState('');
+  const [showTitle, setShowTitle] = useState(false);
+  const [wifiSSID, setWifiSSID] = useState('');
+  const [wifiPassword, setWifiPassword] = useState('');
 
   const handleOptionChange = (fileType) => {
     setSelectedFileType(fileType);
@@ -20,10 +22,23 @@ const CreateFile = () => {
 
   const handleGenerate = () => {
     setShowModal(false);
+    setShowTitle(true);
   };
 
   const handleSocialLinkChange = (e) => {
     setSocialLink(e.target.value);
+  };
+
+  const handleSSIDChange = (e) => {
+    setWifiSSID(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setWifiPassword(e.target.value);
+  };
+
+  const generateWiFiQRCodeValue = () => {
+    return `WIFI:T:WPA;S:${wifiSSID};P:${wifiPassword};H:false;;`;
   };
 
   return (
@@ -31,26 +46,20 @@ const CreateFile = () => {
       <div className="content-sizing generate-file-container p-sm-3 p-md-5 text-dark mb-5 mt-3">
         <div className="row">
           <div className="col-6 d-flex flex-column justify-content-center">
-            <h4 className="p-3 mt-3 text-secondary text-center fs-4 fs-md-3">Convert File:</h4>
+            <h4 className="p-3 mt-3 text-secondary text-center fs-4 fs-md-3">Convert Here:</h4>
 
             <div className="row d-flex justify-content-center align-items-center p-3">
               {/* Image Option */}
-              <div
+              {/* <div
                 className="col-8 mb-3 d-flex justify-content-center align-items-center border border-secondary rounded p-2 option-container"
                 onClick={() => handleOptionChange('image')}
               >
-                <input
-                  type="radio"
-                  id="image"
-                  name="fileType"
-                  value="image"
-                  className="d-none"
-                />
+                <input type="radio" id="image" name="fileType" value="image" className="d-none" />
                 <label htmlFor="image" className="d-flex align-items-center fs-5 option-label">
                   <ImageIcon className="me-2" />
                   <span>Image</span>
                 </label>
-              </div>
+              </div> */}
 
               {/* Facebook Option */}
               <div
@@ -76,15 +85,15 @@ const CreateFile = () => {
                 </label>
               </div>
 
-              {/* PDF Option */}
+              {/* Wi-Fi Option */}
               <div
                 className="col-8 mb-3 d-flex justify-content-center align-items-center border border-secondary rounded p-2 option-container"
-                onClick={() => handleOptionChange('pdf')}
+                onClick={() => handleOptionChange('wifi')}
               >
-                <input type="radio" id="pdf" name="fileType" value="pdf" className="d-none" />
-                <label htmlFor="pdf" className="d-flex align-items-center fs-5 option-label">
-                  <PictureAsPdfIcon className="me-2" />
-                  <span>PDF</span>
+                <input type="radio" id="wifi" name="fileType" value="wifi" className="d-none" />
+                <label htmlFor="wifi" className="d-flex align-items-center fs-5 option-label">
+                  <WifiIcon className="me-2" />
+                  <span>Wi-Fi</span>
                 </label>
               </div>
             </div>
@@ -93,14 +102,14 @@ const CreateFile = () => {
           <div className="col-6 text-center qr-hero-img d-flex justify-content-center align-items-center">
             <div className="row d-flex justify-content-center">
               <div className="col-8 mb-4">
-                <h4>Your Code will appear here:</h4>
+                {showTitle && <h4> Scan Your QR </h4>}
               </div>
               <div className="col-8">
                 <QRCode
-                    size={256}
-                    style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                    value={socialLink}
-                    viewBox={`0 0 256 256`}
+                  size={256}
+                  style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                  value={selectedFileType === 'wifi' ? generateWiFiQRCodeValue() : socialLink}
+                  viewBox={`0 0 256 256`}
                 />
               </div>
             </div>
@@ -117,26 +126,70 @@ const CreateFile = () => {
               <div className="modal-header bg-dark text-white">
                 <h5 className="modal-title" id="exampleModalLabel">
                   {selectedFileType === 'image' ? 'Upload Image' :
-                    selectedFileType === 'pdf' ? 'Upload PDF' :
-                    selectedFileType === 'facebook' ? 'Enter Facebook Link' : 'Enter LinkedIn Link'}
+                    selectedFileType === 'facebook' ? 'Enter Facebook Link' :
+                    selectedFileType === 'linkedin' ? 'Enter LinkedIn Link' : 'Enter Wi-Fi Credentials'}
                 </h5>
                 <button type="button" className="btn-close btn-close-white" onClick={() => setShowModal(false)} aria-label="Close"></button>
               </div>
 
               {/* Modal Body */}
               <div className="modal-body bg-dark text-white">
-                {selectedFileType === 'image' || selectedFileType === 'pdf' ? (
-                  <input type="file"  className="form-control bg-dark text-white" />
+                {selectedFileType === 'image' ? (
+                  <div className="mb-3">
+                    <label htmlFor="imageFile" className="form-label text-white">Upload Image</label>
+                    <input
+                      type="file"
+                      id="imageFile"
+                      onChange={handleImageChange}
+                      className="form-control bg-dark text-white"
+                    />
+                  </div>
+                ) : selectedFileType === 'wifi' ? (
+                  <div>
+                    <div className="mb-3">
+                      <label htmlFor="wifiSSID" className="form-label text-white">Wi-Fi Name (SSID)</label>
+                      <input
+                        type="text"
+                        id="wifiSSID"
+                        placeholder="Wi-Fi SSID"
+                        value={wifiSSID}
+                        onChange={handleSSIDChange}
+                        className="form-control bg-dark text-white"
+                      />
+                    </div>
+
+                    <div className="mb-3">
+                      <label htmlFor="wifiPassword" className="form-label text-white">Wi-Fi Password</label>
+                      <input
+                        type="password"
+                        id="wifiPassword"
+                        placeholder="Wi-Fi Password"
+                        value={wifiPassword}
+                        onChange={handlePasswordChange}
+                        className="form-control bg-dark text-white"
+                      />
+                    </div>
+                  </div>
                 ) : (
-                  <input 
-                    type="text" 
-                    placeholder={`Enter ${selectedFileType === 'facebook' ? 'Facebook' : 'LinkedIn'} Link`} 
-                    value={socialLink} 
-                    onChange={handleSocialLinkChange} 
-                    className="form-control bg-dark text-white" 
-                  />
+                  <div className="mb-3">
+                    <label
+                      htmlFor={selectedFileType === 'facebook' ? 'facebookLink' : 'linkedinLink'}
+                      className="form-label text-white"
+                    >
+                      {`Enter ${selectedFileType === 'facebook' ? 'Facebook' : 'LinkedIn'} Link`}
+                    </label>
+                    <input
+                      type="text"
+                      id={selectedFileType === 'facebook' ? 'facebookLink' : 'linkedinLink'}
+                      placeholder={`Enter ${selectedFileType === 'facebook' ? 'Facebook' : 'LinkedIn'} Link`}
+                      value={socialLink}
+                      onChange={handleSocialLinkChange}
+                      className="form-control bg-dark text-white"
+                    />
+                  </div>
                 )}
               </div>
+
 
               {/* Modal Footer */}
               <div className="modal-footer bg-dark text-white">
