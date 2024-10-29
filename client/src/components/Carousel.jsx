@@ -1,35 +1,32 @@
-import Carousel from 'react-bootstrap/Carousel';
-import CarouselData from './carousedata';
 
-function CarouselSection() {
+
+import React from "react";
+import Carousel from "react-bootstrap/Carousel";
+import CarouselData from "./carousedata";
+
+const CarouselSection = () => {
+  
   return (
-    <div className="container carousel-container content-sizing  mb-4">
-        <div className="row justify-content-center">
-            <div className="col-8">
-            <Carousel>
-                {CarouselData.map((slide, index)=> (
-                     <Carousel.Item key={index} interval={2500}>
-                     <img
-                     className="w-100 carousel-img"
-                     src={slide.image}  // Use the first image from the assets folder
-                     alt={slide.alt}
-                     />
-                     <Carousel.Caption>
-                     <h3>{slide.heading}</h3>
-                     <p>{slide.text}</p>
-                     </Carousel.Caption>
-                 </Carousel.Item>
-                ))}
-               
-                     
+    <>
+      <section className="carousel-wrapper g-0">
+        <div className="row w-100 g-0">
+          <div className="col mx-auto justify-content-center align-items-center">
+            <Carousel className="py-5" fade>
+              {CarouselData.map((slide, index) => (
+                <Carousel.Item key={index} interval={1000}>
+                   <img className="carousel-img" src={slide.image}/>
+                  <Carousel.Caption className="custom-caption">
+                    <h3>{slide.heading}</h3>
+                    <p>{slide.text}</p>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              ))}
             </Carousel>
-            </div>
-    
+          </div>
         </div>
-       
-    </div>
-    
+      </section>
+    </>
   );
-}
+};
 
 export default CarouselSection;

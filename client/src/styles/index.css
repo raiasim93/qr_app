@@ -1,45 +1,127 @@
 :root {
     /* Base font size */
     font-size: 16px;
-  
     /* Font family */
-    --font-family: 'Tinos', serif !important; /* Example font */
-  
-    /* Colors */
-    --background-color: rgb(74, 87, 105) !important; /* Light gray background */
-    --text-color: rgba(255, 255, 255, 0.7); /* Dark gray for text */
-    --secondary-text-color: rgb(216, 208, 208);
-    /* --secondary-background-color: rgb(134, 150, 170); */
-    --secondary-background-color: #ffffff;
-  
-    /* Spacing */
-    --spacing-xs: 4px;
-    --spacing-sm: 8px;
-    --spacing-md: 16px;
-    --spacing-lg: 24px;
-    --spacing-xl: 32px;
-  
-    /* Border radius */
-    --border-radius: 4px;
+    --font-family: 'Lato', sans-serif;
+    /* Updated to use Lato font */
+    --text-color: rgb(123, 78, 140);
+    --small-pading: 1rem;
+    --medium-padding: 3rem;
+    --large-padding: 6rem;
+}
+.sm-padding{
+    padding: var(--small-pading);
+}
+.md-padding{
+    padding: var(--medium-padding);
+}
+.lg-padding{
+    padding: var(--large-padding);
 }
 
 /* Body CSS */
 body {
     font-family: var(--font-family) !important;
     background-color: var(--background-color) !important;
-    color: var(--text-color) !important; /* Default font color */
+    color: var(--text-color) !important;
+    /* Default font color */
     margin: 0;
     padding: 0;
+    word-spacing: var(--word-spacing);
+    /* Add word spacing */
 }
 
-
+.primary-color {
+    background-color: rgb(123, 78, 140);
+}
 
 @media (max-width: 768px) {
     :root {
-        font-size: 13px; 
+        font-size: 13px;
     }
 
     body {
-        line-height: 1.5; 
+        line-height: 1.5;
     }
 }
+
+
+a {
+    color: var(--primary-color) !important;
+}
+
+
+
+.generate-file-container {
+    background-color: var(--secondary-background-color) !important;
+
+}
+
+.carousel-img {
+    height: 70vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+
+/* Ensure pointer and hover effects */
+.option-container {
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Change background and text color on hover */
+.option-container:hover {
+    background-color: rgb(123, 78, 140);
+    color: white;
+}
+
+
+.option-label {
+    cursor: pointer;
+}
+
+.option-label {
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+
+/* Style for white placeholder text */
+input::placeholder {
+    color: white;
+    opacity: 1;
+    /* Ensures that the placeholder is fully visible */
+}
+
+/* If you want to target only specific inputs, you can use a class or ID */
+.form-control::placeholder {
+    color: white;
+    opacity: 1;
+}
+
+
+.btn-custom{
+    background-color: rgb(123, 78, 140) !important;
+    transition: opacity 0.2s ease;
+}
+.btn-custom:hover{
+    opacity: 0.5;
+}
+.custom-caption {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .card-hover-effect{
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card-hover-effect:hover{
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-color: #7b4e8c;
+    border-width: 2px;
+    cursor: pointer;
+  }

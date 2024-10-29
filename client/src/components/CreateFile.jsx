@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import '../styles/App.css';
 import '../styles/index.css';
-import ImageIcon from '@mui/icons-material/Image';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import WifiIcon from '@mui/icons-material/Wifi';  // Wi-Fi icon
 import QRCode from 'react-qr-code';
+import OptionCard from './OptionCard';
 
 const CreateFile = () => {
   const [selectedFileType, setSelectedFileType] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [socialLink, setSocialLink] = useState('');
   const [showTitle, setShowTitle] = useState(false);
-  const [wifiSSID, setWifiSSID] = useState('');
-  const [wifiPassword, setWifiPassword] = useState('');
+
+  //  states to hold final values for QR code generation
+  const [qrValue, setQrValue] = useState('');
+  const [tempSocialLink, setTempSocialLink] = useState('');
+  const [tempWifiSSID, setTempWifiSSID] = useState('');
+  const [tempWifiPassword, setTempWifiPassword] = useState('');
 
   const handleOptionChange = (fileType) => {
     setSelectedFileType(fileType);
@@ -21,85 +24,60 @@ const CreateFile = () => {
   };
 
   const handleGenerate = () => {
+    if (selectedFileType === 'wifi') {
+      setQrValue(`WIFI:T:WPA;S:${tempWifiSSID};P:${tempWifiPassword};H:false;;`);
+    } else {
+      setQrValue(tempSocialLink);
+    }
+    setTempSocialLink('');
+    setTempWifiSSID('');
+    setTempWifiPassword('');
+    // clear modal
     setShowModal(false);
     setShowTitle(true);
   };
 
   const handleSocialLinkChange = (e) => {
-    setSocialLink(e.target.value);
+    setTempSocialLink(e.target.value);  // Use temp state for link
   };
 
   const handleSSIDChange = (e) => {
-    setWifiSSID(e.target.value);
+    setTempWifiSSID(e.target.value);  // Use temp state for SSID
   };
 
   const handlePasswordChange = (e) => {
-    setWifiPassword(e.target.value);
-  };
-
-  const generateWiFiQRCodeValue = () => {
-    return `WIFI:T:WPA;S:${wifiSSID};P:${wifiPassword};H:false;;`;
+    setTempWifiPassword(e.target.value);  // Use temp state for password
   };
 
   return (
     <>
-      <div className="content-sizing generate-file-container p-sm-3 p-md-5 text-dark mb-5 mt-3">
+      <div className="bg-light  p-sm-3 p-md-5 text-dark mb-5 mt-5">
         <div className="row">
-          <div className="col-6 d-flex flex-column justify-content-center">
+          {/* first column */}
+          <div className="col-12 col-md-6 d-flex flex-column justify-content-center">
             <h4 className="p-3 mt-3 text-secondary text-center fs-4 fs-md-3">Convert Here:</h4>
 
             <div className="row d-flex justify-content-center align-items-center p-3">
-              {/* Image Option */}
-              {/* <div
-                className="col-8 mb-3 d-flex justify-content-center align-items-center border border-secondary rounded p-2 option-container"
-                onClick={() => handleOptionChange('image')}
-              >
-                <input type="radio" id="image" name="fileType" value="image" className="d-none" />
-                <label htmlFor="image" className="d-flex align-items-center fs-5 option-label">
-                  <ImageIcon className="me-2" />
-                  <span>Image</span>
-                </label>
-              </div> */}
-
-              {/* Facebook Option */}
-              <div
-                className="col-8 mb-3 d-flex justify-content-center align-items-center border border-secondary rounded p-2 option-container"
-                onClick={() => handleOptionChange('facebook')}
-              >
-                <input type="radio" id="facebook" name="fileType" value="facebook" className="d-none" />
-                <label htmlFor="facebook" className="d-flex align-items-center fs-5 option-label">
-                  <FacebookIcon className="me-2" />
-                  <span>Facebook</span>
-                </label>
-              </div>
-
-              {/* LinkedIn Option */}
-              <div
-                className="col-8 mb-3 d-flex justify-content-center align-items-center border border-secondary rounded p-2 option-container"
-                onClick={() => handleOptionChange('linkedin')}
-              >
-                <input type="radio" id="linkedin" name="fileType" value="linkedin" className="d-none" />
-                <label htmlFor="linkedin" className="d-flex align-items-center fs-5 option-label">
-                  <LinkedInIcon className="me-2" />
-                  <span>LinkedIn</span>
-                </label>
-              </div>
-
-              {/* Wi-Fi Option */}
-              <div
-                className="col-8 mb-3 d-flex justify-content-center align-items-center border border-secondary rounded p-2 option-container"
-                onClick={() => handleOptionChange('wifi')}
-              >
-                <input type="radio" id="wifi" name="fileType" value="wifi" className="d-none" />
-                <label htmlFor="wifi" className="d-flex align-items-center fs-5 option-label">
-                  <WifiIcon className="me-2" />
-                  <span>Wi-Fi</span>
-                </label>
-              </div>
+              {/*  Option rendering using the optionCard component222222*/}
+              <OptionCard
+                  label="Facebook"
+                  icon={FacebookIcon}
+                  onClick={()=> handleOptionChange('facebook')}
+              />
+               <OptionCard
+                  label="LinkedIn"
+                  icon={LinkedInIcon}
+                  onClick={()=> handleOptionChange('linkedin')}
+              />
+               <OptionCard
+                  label="WiFi"
+                  icon={WifiIcon}
+                  onClick={()=> handleOptionChange('wifi')}
+              />
             </div>
           </div>
-
-          <div className="col-6 text-center qr-hero-img d-flex justify-content-center align-items-center">
+          {/* second */}
+          <div className="col-12 col-md-6 text-center qr-hero-img d-flex justify-content-center align-items-center">
             <div className="row d-flex justify-content-center">
               <div className="col-8 mb-4">
                 {showTitle && <h4> Scan Your QR </h4>}
@@ -108,7 +86,7 @@ const CreateFile = () => {
                 <QRCode
                   size={256}
                   style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                  value={selectedFileType === 'wifi' ? generateWiFiQRCodeValue() : socialLink}
+                  value={qrValue}
                   viewBox={`0 0 256 256`}
                 />
               </div>
@@ -140,7 +118,6 @@ const CreateFile = () => {
                     <input
                       type="file"
                       id="imageFile"
-                      onChange={handleImageChange}
                       className="form-control bg-dark text-white"
                     />
                   </div>
@@ -152,7 +129,7 @@ const CreateFile = () => {
                         type="text"
                         id="wifiSSID"
                         placeholder="Wi-Fi SSID"
-                        value={wifiSSID}
+                        value={tempWifiSSID}  // Use temp state
                         onChange={handleSSIDChange}
                         className="form-control bg-dark text-white"
                       />
@@ -164,7 +141,7 @@ const CreateFile = () => {
                         type="password"
                         id="wifiPassword"
                         placeholder="Wi-Fi Password"
-                        value={wifiPassword}
+                        value={tempWifiPassword}  // Use temp state
                         onChange={handlePasswordChange}
                         className="form-control bg-dark text-white"
                       />
@@ -182,14 +159,13 @@ const CreateFile = () => {
                       type="text"
                       id={selectedFileType === 'facebook' ? 'facebookLink' : 'linkedinLink'}
                       placeholder={`Enter ${selectedFileType === 'facebook' ? 'Facebook' : 'LinkedIn'} Link`}
-                      value={socialLink}
+                      value={tempSocialLink}  // Use temp state
                       onChange={handleSocialLinkChange}
                       className="form-control bg-dark text-white"
                     />
                   </div>
                 )}
               </div>
-
 
               {/* Modal Footer */}
               <div className="modal-footer bg-dark text-white">

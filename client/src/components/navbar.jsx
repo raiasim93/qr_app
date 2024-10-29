@@ -6,17 +6,22 @@ import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
 const Navbar = () => {
   return (
    <>
-   <nav className='content-sizing nav-section-container mb-5'>
-    <div className='container navbar-custom '>
-      <div className='p-4 d-flex flex-direction-column justify-content-between '>
+  
+    <div className='row border-bottom  '>
+      <div className='col-10 mx-auto p-4 d-flex flex-direction-column justify-content-between '>
         <div className='d-flex align-items-center '>
-          <QrCodeScannerIcon className='me-4' style={{fontSize: 44}} />
+          <QrCodeScannerIcon className='me-2 ' style={{fontSize: 44}} />
           <a className='text-decoration-none fw-bold fs-2 ' href=""> QR'iifyy </a>
+        </div>
+        <div>
+          <button className="btn px-3 fs-5 text-white rounded-pill btn-custom">
+            Create New
+          </button>
         </div>
        
       </div>
     </div>
-   </nav>
+   
    </>
   );
 };
