@@ -34,6 +34,9 @@ body {
 .primary-color {
     background-color: rgb(123, 78, 140);
 }
+.text-main-color{
+    color: var(--text-color) !important;
+}
 
 @media (max-width: 768px) {
     :root {

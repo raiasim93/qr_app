@@ -4,7 +4,7 @@ import advantagesData from './Advantages';
 
 const FeaturesSection = () => {
   return (<>
-     <section className="g-0 mb-5 bg-light lg-padding">
+     <section className="g-0  bg-light lg-padding">
       <div className="container">
         <div className="row justify-content-center g-3 g-lg-3">
           {advantagesData.map((feature, index) => (

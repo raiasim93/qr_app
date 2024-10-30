@@ -11,7 +11,7 @@ const CarouselSection = () => {
       <section className="carousel-wrapper g-0">
         <div className="row w-100 g-0">
           <div className="col mx-auto justify-content-center align-items-center">
-            <Carousel className="py-5" fade>
+            <Carousel  fade>
               {CarouselData.map((slide, index) => (
                 <Carousel.Item key={index} interval={1000}>
                    <img className="carousel-img" src={slide.image}/>

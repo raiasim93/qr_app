@@ -51,12 +51,13 @@ const CreateFile = () => {
 
   return (
     <>
-      <div className="bg-light  p-sm-3 p-md-5 text-dark mb-5 mt-5">
-        <div className="row">
+      <div className="bg-light  p-sm-3 p-md-5 text-dark ">
+        <div className="row sm-padding">
+        <h4 className="p-3 mt-3 mb-3 text-secondary text-center fs-4 fs-md-3">Convert Here:</h4>
+
           {/* first column */}
           <div className="col-12 col-md-6 d-flex flex-column justify-content-center">
-            <h4 className="p-3 mt-3 text-secondary text-center fs-4 fs-md-3">Convert Here:</h4>
-
+          
             <div className="row d-flex justify-content-center align-items-center p-3">
               {/*  Option rendering using the optionCard component222222*/}
               <OptionCard

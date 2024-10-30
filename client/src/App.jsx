@@ -7,17 +7,21 @@ import CarouselSection from "./components/Carousel";
 import Title from "./components/Title";
 import Footer from "./components/footer";
 import FeaturesSection from "./components/FeaturesSection";
+import InfoSection from "./components/InfoSection";
 
 const App = () => {
   return (
     <>
       <Navbar />
       <CarouselSection />
-      <Title title={"Create Your QRCode"} />
+      <Title title={"Create Your QRCode"} subtitle={'Get Started'} />
       <CreateFile />
-      <Title title={"Why QR'ify is your best choice?"} subtitle={'Get Started'} />
+      <Title title={"Why QR'ify is your best choice?"}  />
       <FeaturesSection />
+      <Title title={"Frequently Asked Questions"} />
+      <InfoSection />
       <Footer />
+      
     </>
   );
 };
