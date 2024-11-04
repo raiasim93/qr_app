@@ -128,3 +128,22 @@ input::placeholder {
     border-width: 2px;
     cursor: pointer;
   }
+
+  /* custom for modal */
+  .custom-modal {
+    background-color: rgb(123, 78, 140);
+    color: white;
+  }
+  
+  .custom-modal-header,
+  .custom-modal-footer {
+    background-color: rgb(123, 78, 140);
+    color: white;
+  }
+  
+  .custom-modal-input {
+    background-color: rgb(123, 78, 140);
+    color: white;
+    border: 1px solid #ddd;
+  }
+  

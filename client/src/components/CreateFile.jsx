@@ -7,6 +7,7 @@ import WifiIcon from '@mui/icons-material/Wifi';  // Wi-Fi icon
 import QRCode from 'react-qr-code';
 import OptionCard from './OptionCard';
 
+
 const CreateFile = () => {
   const [selectedFileType, setSelectedFileType] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -98,85 +99,86 @@ const CreateFile = () => {
 
       {/* Modal */}
       {showModal && (
-        <div className="modal fade show" style={{ display: 'block' }} id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog">
-            <div className="modal-content bg-dark text-white">
-              {/* Modal Header */}
-              <div className="modal-header bg-dark text-white">
-                <h5 className="modal-title" id="exampleModalLabel">
-                  {selectedFileType === 'image' ? 'Upload Image' :
-                    selectedFileType === 'facebook' ? 'Enter Facebook Link' :
-                    selectedFileType === 'linkedin' ? 'Enter LinkedIn Link' : 'Enter Wi-Fi Credentials'}
-                </h5>
-                <button type="button" className="btn-close btn-close-white" onClick={() => setShowModal(false)} aria-label="Close"></button>
+  <div className="modal fade show" style={{ display: 'block' }} id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div className="modal-dialog">
+      <div className="modal-content custom-modal">
+        {/* Modal Header */}
+        <div className="modal-header bg-secondary text-white">
+          <h5 className="modal-title" id="exampleModalLabel">
+            {selectedFileType === 'image' ? 'Upload Image' :
+              selectedFileType === 'facebook' ? 'Enter Facebook Link' :
+              selectedFileType === 'linkedin' ? 'Enter LinkedIn Link' : 'Enter Wi-Fi Credentials'}
+          </h5>
+          <button type="button" className="btn-close btn-close-white" onClick={() => setShowModal(false)} aria-label="Close"></button>
+        </div>
+
+        {/* Modal Body */}
+        <div className="modal-body bg-secondary text-white">
+          {selectedFileType === 'image' ? (
+            <div className="mb-3">
+              <label htmlFor="imageFile" className="form-label">Upload Image</label>
+              <input
+                type="file"
+                id="imageFile"
+                className="form-control custom-modal-input"
+              />
+            </div>
+          ) : selectedFileType === 'wifi' ? (
+            <div>
+              <div className="mb-3">
+                <label htmlFor="wifiSSID" className="form-label">Wi-Fi Name (SSID)</label>
+                <input
+                  type="text"
+                  id="wifiSSID"
+                  placeholder="Wi-Fi SSID"
+                  value={tempWifiSSID}
+                  onChange={handleSSIDChange}
+                  className="form-control custom-modal-input"
+                />
               </div>
 
-              {/* Modal Body */}
-              <div className="modal-body bg-dark text-white">
-                {selectedFileType === 'image' ? (
-                  <div className="mb-3">
-                    <label htmlFor="imageFile" className="form-label text-white">Upload Image</label>
-                    <input
-                      type="file"
-                      id="imageFile"
-                      className="form-control bg-dark text-white"
-                    />
-                  </div>
-                ) : selectedFileType === 'wifi' ? (
-                  <div>
-                    <div className="mb-3">
-                      <label htmlFor="wifiSSID" className="form-label text-white">Wi-Fi Name (SSID)</label>
-                      <input
-                        type="text"
-                        id="wifiSSID"
-                        placeholder="Wi-Fi SSID"
-                        value={tempWifiSSID}  // Use temp state
-                        onChange={handleSSIDChange}
-                        className="form-control bg-dark text-white"
-                      />
-                    </div>
-
-                    <div className="mb-3">
-                      <label htmlFor="wifiPassword" className="form-label text-white">Wi-Fi Password</label>
-                      <input
-                        type="password"
-                        id="wifiPassword"
-                        placeholder="Wi-Fi Password"
-                        value={tempWifiPassword}  // Use temp state
-                        onChange={handlePasswordChange}
-                        className="form-control bg-dark text-white"
-                      />
-                    </div>
-                  </div>
-                ) : (
-                  <div className="mb-3">
-                    <label
-                      htmlFor={selectedFileType === 'facebook' ? 'facebookLink' : 'linkedinLink'}
-                      className="form-label text-white"
-                    >
-                      {`Enter ${selectedFileType === 'facebook' ? 'Facebook' : 'LinkedIn'} Link`}
-                    </label>
-                    <input
-                      type="text"
-                      id={selectedFileType === 'facebook' ? 'facebookLink' : 'linkedinLink'}
-                      placeholder={`Enter ${selectedFileType === 'facebook' ? 'Facebook' : 'LinkedIn'} Link`}
-                      value={tempSocialLink}  // Use temp state
-                      onChange={handleSocialLinkChange}
-                      className="form-control bg-dark text-white"
-                    />
-                  </div>
-                )}
-              </div>
-
-              {/* Modal Footer */}
-              <div className="modal-footer bg-dark text-white">
-                <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>Close</button>
-                <button type="button" className="btn btn-primary" onClick={handleGenerate}>Generate</button>
+              <div className="mb-3">
+                <label htmlFor="wifiPassword" className="form-label">Wi-Fi Password</label>
+                <input
+                  type="password"
+                  id="wifiPassword"
+                  placeholder="Wi-Fi Password"
+                  value={tempWifiPassword}
+                  onChange={handlePasswordChange}
+                  className="form-control custom-modal-input"
+                />
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="mb-3">
+              <label
+                htmlFor={selectedFileType === 'facebook' ? 'facebookLink' : 'linkedinLink'}
+                className="form-label"
+              >
+                {`Enter ${selectedFileType === 'facebook' ? 'Facebook' : 'LinkedIn'} Link`}
+              </label>
+              <input
+                type="text"
+                id={selectedFileType === 'facebook' ? 'facebookLink' : 'linkedinLink'}
+                placeholder={`Enter ${selectedFileType === 'facebook' ? 'Facebook' : 'LinkedIn'} Link`}
+                value={tempSocialLink}
+                onChange={handleSocialLinkChange}
+                className="form-control custom-modal-input"
+              />
+            </div>
+          )}
         </div>
-      )}
+
+        {/* Modal Footer */}
+        <div className="bg-secondary text-white d-flex justify-content-end p-1 ">
+          <button type="button" className="btn btn-primary" onClick={() => setShowModal(false)}>Close</button>
+          <button type="button" className="ms-3 me-3 btn btn-primary" onClick={handleGenerate}>Generate</button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
     </>
   );
 };

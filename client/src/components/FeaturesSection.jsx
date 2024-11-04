@@ -10,7 +10,7 @@ const FeaturesSection = () => {
           {advantagesData.map((feature, index) => (
             <div key={index} className="col-12 col-lg-4 d-flex">
               <Card
-                icon={<feature.icon />}
+                icon=  {<feature.icon />}
                 title={feature.title}
                 desc={feature.desc}
               />

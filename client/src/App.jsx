@@ -7,7 +7,7 @@ import CarouselSection from "./components/Carousel";
 import Title from "./components/Title";
 import Footer from "./components/footer";
 import FeaturesSection from "./components/FeaturesSection";
-import InfoSection from "./components/InfoSection";
+import FaqSection from "./components/FaqSection";
 
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
       <Title title={"Why QR'ify is your best choice?"}  />
       <FeaturesSection />
       <Title title={"Frequently Asked Questions"} />
-      <InfoSection />
+      <FaqSection />
       <Footer />
       
     </>
